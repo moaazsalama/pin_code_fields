@@ -44,7 +44,7 @@ class PinCodeTextField extends StatefulWidget {
 
   /// Blink Duration if blinkWhenObscuring is set to true
   final Duration blinkDuration;
-
+final void Function(PointerDownEvent)? onTapOutside;
   /// returns the current typed text in the fields
   final ValueChanged<String>? onChanged;
 
@@ -241,7 +241,7 @@ class PinCodeTextField extends StatefulWidget {
     this.enabled = true,
     this.inputFormatters = const <TextInputFormatter>[],
     this.textStyle,
-    this.useHapticFeedback = false,
+    this.useHapticFeedback = false,this. onTapOutside,
     this.hapticFeedbackTypes = HapticFeedbackTypes.light,
     this.pastedTextStyle,
     this.enableActiveFill = false,
@@ -779,9 +779,7 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
           controller: _textEditingController,
           focusNode: _focusNode,
           enabled: widget.enabled,
-          onTapOutside: (event) {
-            FocusScope.of(context).unfocus();
-          },
+          onTapOutside: widget.onTapOutside,
           autofillHints: widget.enablePinAutofill && widget.enabled
               ? <String>[AutofillHints.oneTimeCode]
               : null,
