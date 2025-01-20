@@ -779,6 +779,9 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
           controller: _textEditingController,
           focusNode: _focusNode,
           enabled: widget.enabled,
+          onTapOutside: (event) {
+            FocusScope.of(context).unfocus();
+          },
           autofillHints: widget.enablePinAutofill && widget.enabled
               ? <String>[AutofillHints.oneTimeCode]
               : null,
